@@ -20,28 +20,14 @@ function App() {
 
   const [userSelect, setUserSelect] = useState(null);
   const [computerSelect, setComputerSelecet] = useState(null);
-  const [userResult, setUserResult] = useState("");
-  const [computerResult, setComputerResult] = useState("");
-
-  const judgement = (user, computer) => {
-    if (user.picked == computer.picked) {
-      return "tie";
-    } else if (user.picked == "rock") {
-      return computer.picked == "scissor" ? "win" : "lose";
-    } else if (user.picked == "scissor") {
-      return computer.picked == "paper" ? "win" : "lose";
-    } else if (user.picked == "paper") {
-      return computer.picked == "rock" ? "win" : "lose";
-    }
-  };
+  const [result, setResult] = useState("");
 
   const play = (pick) => {
     let userChoice = choice[pick];
     setUserSelect(userChoice);
     let computerChoice = randomChoice();
     setComputerSelecet(computerChoice);
-    setUserResult(judgement(userChoice, computerChoice));
-    setComputerResult(judgement(computerChoice, userChoice))
+    setResult(judgement(userChoice, computerChoice));
   };
 
   const randomChoice = () => {
@@ -51,11 +37,23 @@ function App() {
     return choice[computerChoice];
   };
 
+  const judgement = (user, computer) => {
+    if (user.picked === computer.picked) {
+      return "tie";
+    } else if (user.picked === "rock") {
+      return computer.picked === "scissor" ? "win" : "lose";
+    } else if (user.picked === "scissor") {
+      return computer.picked === "paper" ? "win" : "lose";
+    } else if (user.picked === "paper") {
+      return computer.picked === "rock" ? "win" : "lose";
+    }
+  };
+
   return (
     <div>
       <div className="flexBox">
-        <Box name="YOU" result={userResult} item={userSelect} />
-        <Box name="COMPUTER" result={computerResult} item={computerSelect} />
+        <Box name="YOU" result={result} item={userSelect} />
+        <Box name="COMPUTER" result={result} item={computerSelect} />
       </div>
       <div className="flexBox">
         <button onClick={() => play("rock")}>ROCK</button>

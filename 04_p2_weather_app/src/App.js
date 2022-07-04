@@ -4,10 +4,12 @@ import { useState } from "react";
 import { useEffect } from "react";
 import WeatherBox from "./component/WeatherBox";
 import WeatherButton from "./component/WeatherButton";
+import ClipLoader from "react-spinners/ClipLoader";
 
 function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState("");
+  const [loading, setLoading] = useState(false);
   const cities = ["Paris", "New York", "Tokyo", "Seoul"];
 
   const getCurrentLocation = () => {
@@ -21,17 +23,21 @@ function App() {
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=a10aa308715f8a04b8fa844108e702c8`;
+    setLoading(true);
     let response = await fetch(url);
     let data = await response.json();
     setWeather(data);
+    setLoading(false);
   };
 
   const getWeatherByCity = async () => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=a10aa308715f8a04b8fa844108e702c8`;
+    setLoading(true);
     let response = await fetch(url);
     let data = await response.json();
     console.log("weather by city data is ", data);
     setWeather(data);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -44,10 +50,17 @@ function App() {
 
   return (
     <div>
-      <div className="container">
-        <WeatherBox weather={weather} />
-        <WeatherButton cities={cities} setCity={setCity} />
-      </div>
+      {loading ? (
+        <div className="container">
+          <ClipLoader color={"red"} loading={loading} size={150} speedMultiplier={".5"} />
+          <WeatherButton cities={cities} setCity={setCity} />
+        </div>
+      ) : (
+        <div className="container">
+          <WeatherBox weather={weather} />
+          <WeatherButton cities={cities} setCity={setCity} />
+        </div>
+      )}
     </div>
   );
 }

@@ -40,8 +40,16 @@ function App() {
     setLoading(false);
   };
 
+  const handleCityChange = (city) => {
+    if (city === "current") {
+      setCity("");
+    } else {
+      setCity(city);
+    }
+  };
+
   useEffect(() => {
-    if (city == "") {
+    if (city === "") {
       getCurrentLocation();
     } else {
       getWeatherByCity();
@@ -53,12 +61,11 @@ function App() {
       {loading ? (
         <div className="container">
           <ClipLoader color={"red"} loading={loading} size={150} speedMultiplier={".5"} />
-          <WeatherButton cities={cities} setCity={setCity} />
         </div>
       ) : (
         <div className="container">
           <WeatherBox weather={weather} />
-          <WeatherButton cities={cities} setCity={setCity} />
+          <WeatherButton cities={cities} handleCityChange={handleCityChange} selectedCity={city} />
         </div>
       )}
     </div>

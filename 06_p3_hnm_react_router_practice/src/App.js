@@ -1,9 +1,11 @@
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
 import ProductAll from "./page/ProductAll";
 import Login from "./page/Login";
 import ProductDetail from "./page/ProductDetail";
 import Navbar from "./component/Navbar";
+import { useState, useEffect } from "react";
 
 // 1. 전체 상품 페이지 / login 페이지 / 상품 상세 페이지 제작 예정 ---done
 // 1-1. navbar 만들기 >> 각 component에 만들게 되면 중복이 다수 발생. 따라서, 공통내용은 routes 밖에서 작성! ---done
@@ -17,12 +19,18 @@ import Navbar from "./component/Navbar";
 // 8. 상품을 검색 할 수 있다.
 
 function App() {
+  const [authenticate, setAuthenticate] = useState(false);
+
+  useEffect(() => {
+    console.log("a is ", authenticate);
+  }, [authenticate]);
+
   return (
     <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<ProductAll />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login  setAuthenticate={setAuthenticate} />}/>
         <Route path="/product/:id" element={<ProductDetail />} />
       </Routes>
     </div>

@@ -2,29 +2,38 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const menuList = ["여성", "Divided", "남성", "신생아/유아", "아동", "H&M HOME", "Sale", "지속가능성"];
+
+  const navigate = useNavigate();
+  const navToLoginPage = () => {
+    navigate("/login");
+  };
+  const navToProductAllPage = () => {
+    navigate("/");
+  };
+
   return (
     <div>
       <div>
-        <div className="login_button">
+        <div className="login_area">
           <FontAwesomeIcon icon={faUser} />
-          <div>LOGIN</div>
+          <div onClick={navToLoginPage}>LOGIN</div>
         </div>
       </div>
 
       <div>
         <div className="nav_section">
-          <img width={100} src="https://logos-world.net/wp-content/uploads/2020/04/HM-Logo.png" alt="" />
+          <img width={100} src="https://logos-world.net/wp-content/uploads/2020/04/HM-Logo.png" alt="" onClick={navToProductAllPage} />
         </div>
       </div>
 
       <div className="menu_area">
         <ul className="menu_list">
-          {/* 리스트 array와 map을 사용하여 자동으로 그려주도록 한다! */}
-          {menuList.map((menu) => (
-            <li>{menu}</li>
+          {menuList.map((menu, index) => (
+            <li key={index}>{menu}</li>
           ))}
         </ul>
 

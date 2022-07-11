@@ -22,7 +22,7 @@ function App() {
   const [authenticate, setAuthenticate] = useState(false);
 
   useEffect(() => {
-    console.log("a is ", authenticate);
+    console.log("authenticate is ", authenticate);
   }, [authenticate]);
 
   return (

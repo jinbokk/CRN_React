@@ -92,3 +92,8 @@
   width: 265px;
   text-align: right;
 }
+
+.product_img {
+  display: flex;
+  justify-content: flex-end;
+}

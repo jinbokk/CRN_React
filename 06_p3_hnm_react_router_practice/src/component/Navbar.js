@@ -15,6 +15,14 @@ const Navbar = () => {
     navigate("/");
   };
 
+  const search = (event) => {
+    if (event.key == "Enter") {
+      let keyword = event.target.value;
+      console.log("clicked", event.key, "key is", keyword);
+      navigate(`/?q=${keyword}`)
+    }
+  };
+
   return (
     <div>
       <div>
@@ -39,7 +47,7 @@ const Navbar = () => {
 
         <div className="search_area">
           <FontAwesomeIcon icon={faSearch} className="search_button" />
-          <input type="text" className="search_input" />
+          <input type="text" className="search_input" onKeyPress={(event) => search(event)} />
         </div>
       </div>
     </div>

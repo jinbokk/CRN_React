@@ -13,12 +13,17 @@ const Counter = () => {
     dispatch({ type: "DECREMENT" });
   };
 
+  const login = () => {
+    dispatch({ type: "login", payload: { id: "JINBOK", pw: "12345" } });
+  };
+
   return (
     <div>
       <div>
         <h1>{num}</h1>
-        <button onClick={increase}>+1</button>
         <button onClick={decrease}>-1</button>
+        <button onClick={increase}>+1</button>
+        <button onClick={login}>LOGIN</button>
       </div>
     </div>
   );

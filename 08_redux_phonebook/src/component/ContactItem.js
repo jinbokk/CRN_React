@@ -1,15 +1,19 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 
-const ContactItem = () => {
+const ContactItem = ({ item }) => {
   return (
     <Row>
       <Col lg={2}>
-        <img className="contactImg" src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg" />
+        <img
+          className="contactImg"
+          src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Unknown_person.jpg"
+          alt=""
+        />
       </Col>
       <Col lg={10}>
-        <div>이름</div>
-        <div>1111111111111</div>
+        <h4>{item.name}</h4>
+        <p>{item.phoneNumber}</p>
       </Col>
     </Row>
   );

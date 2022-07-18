@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBox from "./SearchBox";
-import { useSelector } from "react-redux/es/exports";
+import { useSelector } from "react-redux";
 import ContactItem from "./ContactItem";
 
 const ContactList = () => {

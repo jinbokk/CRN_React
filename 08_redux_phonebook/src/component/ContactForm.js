@@ -3,9 +3,9 @@ import { Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
 const ContactForm = () => {
-  let [name, setName] = useState("");
-  let [phoneNumber, setPhoneNumber] = useState(0);
-  let dispatch = useDispatch();
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState(0);
+  const dispatch = useDispatch();
 
   const addContact = (e) => {
     e.preventDefault();
@@ -14,10 +14,11 @@ const ContactForm = () => {
     dispatch({ type: "ADD_CONTACT", payload: { name, phoneNumber } });
     setName("");
     setPhoneNumber("");
+    console.log(e);
   };
 
   return (
-    <Form>
+    <Form onSubmit={addContact}>
       <Form.Group className="mb-3" controlId="formName">
         <Form.Label>Name</Form.Label>
         <Form.Control
@@ -41,8 +42,7 @@ const ContactForm = () => {
           value={phoneNumber}
         />
       </Form.Group>
-      <Button variant="primary" type="submit" onSubmit={addContact}>
-        {/* 버튼 타입이 submit 일때는, onClick 이 아닌 onSubmit 이벤트로 설정해야한다 */}
+      <Button variant="primary" type="submit">
         Add
       </Button>
     </Form>

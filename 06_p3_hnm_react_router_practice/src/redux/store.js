@@ -1,7 +1,7 @@
 import { legacy_createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import productReducer from "./reducers/productReducer";
+import rootReducer from "./reducers/index";
 
-let store = legacy_createStore(productReducer, applyMiddleware(thunk));
+let store = legacy_createStore(rootReducer, applyMiddleware(thunk));
 
 export default store;
